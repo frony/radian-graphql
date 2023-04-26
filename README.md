@@ -1,35 +1,113 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+Radian Assignment - Api/Service
+===============================
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Design and develop an API in NestJS with endpoints to add new cars and view the list of saved cars as well as a single car by ID.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Requirements
 
-## Description
+## Database
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The data will be stored in and retrieved from a MongoDB or Postgresql database. (**Bonus points for using an ORM tool like Prisma in your project to access the database**).
 
-## Installation
+Design the Cars collection with the following columns:
+- VehicleID
+- Make
+- Model
+- Year
+- Color
 
+*Some examples of rows in a MongoDB collection would be:*
+```text
+{ 1, "Toyota", "Corolla", 2012, "Red" },
+{ 2, "Nissan", "Altima", 2015, "White" },
+{ 456,   "BMW",  "M5",  2019,  "Black" },
+```
+
+## Api/Service
+The Api you will create in NestJS can use either HTTP/RESTful endpoints or GraphQL queries and mutations (**Bonus points for implementing the endpoints in GraphQL**)
+
+## Endpoints
+
+The following endpoints should be available in your Api:
+
+### Get list of all cars stored 
+**(eg: GET /cars or POST query GetAllCars() if using GraphQL)**
+
+This should return a list of all the cars stored in the database in the following format:
+```text
+results = [
+{ vehicleId: 1, make: "Toyota", model: "Corolla",year: 2012,color: "Red" },
+
+{ vehicleId: 2, make: "Nissan", model: "Altima", year: 2015, color: "White" },
+
+......
+
+]
+```
+
+### Fetch list of cars grouped by model 
+**(eg: GET /car/model or POST query GetCarsByModel() if using GraphQL)**
+
+This should return a list of all the cars stored in the database in the following format:
+```text
+results = [
+
+{
+
+    make: "Toyota",
+
+    items: [
+
+      { vehicleId: 1, model: "Corolla",year: 2012,color: "Red" },
+
+      // ...other results for toyota
+
+    ],
+
+},
+
+{
+
+    make: "Nissan",
+
+    items: [
+
+      { vehicleId: 2, model: "Altima",year: 2015,color: "White" },
+
+      // ...other results for toyota
+
+    ],
+
+},
+
+// ... other make items
+
+]
+```
+
+### Add a new vehicle object to the database
+### Add a list of vehicles to the database
+
+
+#Author
+Marcos Frony <mfrony@gmail.com>
+
+# Installation
 ```bash
 $ npm install
+```
+
+## Start the database
+**You must have [Docker](https://docs.docker.com/engine/install/) installed.**
+
+From the root of the project, run:
+```shell
+make db-start
+```
+
+## Stop the database
+```shell
+make db-stop
 ```
 
 ## Running the app
@@ -57,17 +135,3 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
