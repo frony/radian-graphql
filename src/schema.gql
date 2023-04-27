@@ -1,0 +1,39 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Car model"""
+type Car {
+  VehicleID: ID!
+  Make: String!
+  Model: String!
+  Year: Float!
+  Color: String!
+}
+
+type Query {
+  cars: [Car!]!
+  car(id: Int!): Car!
+}
+
+type Mutation {
+  createCar(createCarInput: CreateCarInput!): Car!
+  updateCar(id: Float!, updateCarInput: UpdateCarInput!): Car!
+  removeCar(id: Int!): Car!
+}
+
+"""Create car input object input"""
+input CreateCarInput {
+  Year: Int!
+  Make: String!
+  Model: String!
+  Color: String!
+}
+
+"""Update car input object input"""
+input UpdateCarInput {
+  Year: Int
+  Make: String
+  Model: String
+  Color: String
+}

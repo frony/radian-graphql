@@ -92,6 +92,12 @@ results = [
 #Author
 Marcos Frony <mfrony@gmail.com>
 
+# Solution Design
+This project was built using the following:
+- PostgreSQL
+- TypeOrm
+- NestJS GraphQL Code-First
+
 # Installation
 ```bash
 $ npm install
