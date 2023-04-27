@@ -14,12 +14,12 @@ export class CarsResolver {
     return this.carsService.create(createCarInput);
   }
 
-  @Query(() => [Car], { name: 'cars' })
+  @Query(() => [Car], { name: 'GetAllCars' })
   findAll() {
     return this.carsService.findAll();
   }
 
-  @Query(() => Car, { name: 'car' })
+  @Query(() => Car, { name: 'GetCarById' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.carsService.findOne(id);
   }
