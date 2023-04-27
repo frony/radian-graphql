@@ -92,7 +92,7 @@ results = [
 #Author
 Marcos Frony <mfrony@gmail.com>
 
-# Solution Design
+# Solution Tech Stack
 This project was built using the following:
 - PostgreSQL
 - TypeOrm

@@ -27,7 +27,8 @@ export class CarsResolver {
   @Mutation(() => Car)
   updateCar(
     @Args('id', ParseIntPipe) id: number,
-    @Args('updateCarInput') updateCarInput: UpdateCarInput) {
+    @Args('updateCarInput') updateCarInput: UpdateCarInput,
+  ) {
     return this.carsService.update(id, updateCarInput);
   }
 
