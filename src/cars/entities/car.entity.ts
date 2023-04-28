@@ -1,8 +1,15 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  // JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Automaker } from '../../automakers/entities/automaker.entity';
 
 @Entity()
-@ObjectType({ description: 'Car model' })
+@ObjectType({ description: 'Car entity' })
 export class Car {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
@@ -19,4 +26,10 @@ export class Car {
 
   @Column()
   Color: string;
+
+  @ManyToOne(() => Automaker, (automaker) => automaker.Cars, {
+    cascade: ['insert', 'update'],
+  })
+  @Field(() => Automaker)
+  Automaker?: Automaker;
 }

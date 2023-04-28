@@ -1,0 +1,66 @@
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { UserInputError } from '@nestjs/apollo';
+import { CreateAutomakerInput } from './dto/create-automaker.input';
+import { UpdateAutomakerInput } from './dto/update-automaker.input';
+import { Automaker } from './entities/automaker.entity';
+import { CarsService } from '../cars/cars.service';
+
+@Injectable()
+export class AutomakersService {
+  constructor(
+    @InjectRepository(Automaker)
+    private readonly automakersRepository: Repository<Automaker>,
+    private readonly carsService: CarsService,
+  ) {}
+
+  create(createAutomakerInput: CreateAutomakerInput) {
+    const newAutomaker = this.automakersRepository.create(createAutomakerInput);
+    return this.automakersRepository.save(newAutomaker);
+  }
+
+  findAll() {
+    return this.automakersRepository.find({
+      relations: { Cars: true },
+    });
+  }
+
+  async findOne(id: number) {
+    const automaker = await this.automakersRepository.findOne({
+      where: { MakeId: +id },
+      relations: { Cars: true },
+    });
+    if (!automaker) {
+      throw new UserInputError(`Automaker ${id} does not exist`);
+    }
+    return automaker;
+  }
+
+  async findByMake(make: string): Promise<Automaker | null> {
+    const automaker = await this.automakersRepository.findOne({
+      where: { Make: make },
+    });
+    if (automaker) {
+      return automaker;
+    }
+    return null;
+  }
+
+  async update(id: number, updateAutomakerInput: UpdateAutomakerInput) {
+    const automaker = await this.automakersRepository.preload({
+      MakeId: id,
+      ...updateAutomakerInput,
+    });
+    if (!automaker) {
+      throw new UserInputError(`Automaker ${id} does not exist`);
+    }
+    return this.automakersRepository.save(automaker);
+  }
+
+  async remove(id: number) {
+    const automaker = await this.findOne(id);
+    const response = await this.automakersRepository.remove(automaker);
+    return response;
+  }
+}

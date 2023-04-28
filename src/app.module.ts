@@ -5,6 +5,7 @@ import { join } from 'path';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { CarsModule } from './cars/cars.module';
+import { AutomakersModule } from './automakers/automakers.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { CarsModule } from './cars/cars.module';
       installSubscriptionHandlers: true,
     }),
     CarsModule,
+    AutomakersModule,
   ],
   controllers: [],
   providers: [],
