@@ -104,7 +104,7 @@ This project was built using the following:
 - NestJS GraphQL Code-First
 
 # GraphQL Query Examples
-[Please refer to this page]('./examples.md)
+[Please refer to this page]('examples.md)
 
 # Installation
 ```bash
