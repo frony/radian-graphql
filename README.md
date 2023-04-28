@@ -48,7 +48,11 @@ results = [
 ### Fetch list of cars grouped by model 
 **(eg: GET /car/model or POST query GetCarsByModel() if using GraphQL)**
 
-This should return a list of all the cars stored in the database in the following format:
+This should return a list of all the cars stored in the database in the following format. 
+<details>
+
+<summary>Click to view content</summary>
+
 ```text
 results = [
 
@@ -84,6 +88,7 @@ results = [
 
 ]
 ```
+</details>
 
 ### Add a new vehicle object to the database
 ### Add a list of vehicles to the database
@@ -97,6 +102,9 @@ This project was built using the following:
 - PostgreSQL
 - TypeOrm
 - NestJS GraphQL Code-First
+
+# GraphQL Query Examples
+[Please refer to this page]('./examples.md)
 
 # Installation
 ```bash
