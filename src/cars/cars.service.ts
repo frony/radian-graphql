@@ -6,7 +6,6 @@ import {
 import { Car } from './entities/car.entity';
 import { DataSource, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserInputError } from '@nestjs/apollo';
 import { AutomakersService } from '../automakers/automakers.service';
 import { CreateCarInput } from './dto/create-car.input';
 import { UpdateCarInput } from './dto/update-car.input';
@@ -62,7 +61,7 @@ export class CarsService {
       relations: { Automaker: true },
     });
     if (!car) {
-      throw new UserInputError(`Coffee ${id} does not exist`);
+      throw new NotFoundException(`Car ${id} not found`);
     }
     return car;
   }

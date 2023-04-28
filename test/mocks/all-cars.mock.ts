@@ -1,0 +1,86 @@
+export const allCars = [
+  {
+    VehicleID: '8',
+    Make: 'TOYOTA',
+    Model: 'Corolla',
+    Year: 2010,
+    Color: 'BLUE',
+    Automaker: {
+      MakeId: '8',
+      Make: 'Toyota',
+    },
+    __typename: 'Car',
+  },
+  {
+    VehicleID: '9',
+    Make: 'TOYOTA',
+    Model: 'Camry',
+    Year: 2010,
+    Color: 'BLACK',
+    Automaker: {
+      MakeId: '8',
+      Make: 'Toyota',
+    },
+    __typename: 'Car',
+  },
+  {
+    VehicleID: '10',
+    Make: 'HONDA',
+    Model: 'Fit',
+    Year: 2010,
+    Color: 'GOLD',
+    Automaker: {
+      MakeId: '9',
+      Make: 'Honda',
+    },
+    __typename: 'Car',
+  },
+  {
+    VehicleID: '11',
+    Make: 'HONDA',
+    Model: 'Accord',
+    Year: 2010,
+    Color: 'WHITE',
+    Automaker: {
+      MakeId: '9',
+      Make: 'Honda',
+    },
+    __typename: 'Car',
+  },
+  {
+    VehicleID: '12',
+    Make: 'HONDA',
+    Model: 'Corolla',
+    Year: 2010,
+    Color: 'BLUE',
+    Automaker: {
+      MakeId: '9',
+      Make: 'Honda',
+    },
+    __typename: 'Car',
+  },
+  {
+    VehicleID: '13',
+    Make: 'ACURA',
+    Model: 'FX2',
+    Year: 2010,
+    Color: 'BLUE',
+    Automaker: {
+      MakeId: '10',
+      Make: 'Acura',
+    },
+    __typename: 'Car',
+  },
+  {
+    VehicleID: '14',
+    Make: 'LOTUS',
+    Model: 'Emira',
+    Year: 2024,
+    Color: 'BLUE',
+    Automaker: {
+      MakeId: '11',
+      Make: 'Lotus',
+    },
+    __typename: 'Car',
+  },
+];
