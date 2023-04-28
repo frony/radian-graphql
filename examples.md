@@ -141,6 +141,30 @@ query Cars {
           "Make": "Honda"
         },
         "__typename": "Car"
+      },
+      {
+        "VehicleID": "13",
+        "Make": "ACURA",
+        "Model": "FX2",
+        "Year": 2010,
+        "Color": "BLUE",
+        "Automaker": {
+          "MakeId": "10",
+          "Make": "Acura"
+        },
+        "__typename": "Car"
+      },
+      {
+        "VehicleID": "14",
+        "Make": "LOTUS",
+        "Model": "Emira",
+        "Year": 2024,
+        "Color": "BLUE",
+        "Automaker": {
+          "MakeId": "11",
+          "Make": "Lotus"
+        },
+        "__typename": "Car"
       }
     ]
   }
