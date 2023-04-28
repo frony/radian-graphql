@@ -103,6 +103,8 @@ This project was built using the following:
 - TypeOrm
 - NestJS GraphQL Code-First
 
+**Queries and Mutations for all CRUD actions are in place for both Car and Automaker entities.**
+
 # GraphQL Query Examples
 [Please refer to this page](examples.md)
 
