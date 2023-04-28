@@ -13,6 +13,6 @@ export class Automaker {
   Make: string;
 
   @OneToMany(() => Car, (car) => car.Automaker)
-  @Field(() => Car)
+  @Field(() => [Car])
   Cars?: Car[];
 }

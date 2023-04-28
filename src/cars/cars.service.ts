@@ -9,16 +9,26 @@ import { Car } from './entities/car.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserInputError } from '@nestjs/apollo';
+import { AutomakersService } from '../automakers/automakers.service';
 
 @Injectable()
 export class CarsService {
   constructor(
     @InjectRepository(Car)
     private readonly carsRepository: Repository<Car>,
+    private readonly automakersService: AutomakersService,
   ) {}
 
   async create(createCarDto: CreateCarInput) {
-    const car = await this.carsRepository.create(createCarDto);
+    const { Make } = createCarDto;
+    let automaker = await this.automakersService.findByMake(Make);
+    if (!automaker) {
+      automaker = await this.automakersService.create({ Make });
+    }
+    const car = await this.carsRepository.create({
+      ...createCarDto,
+      Automaker: automaker,
+    });
     if (!car) {
       throw new BadRequestException('Please review your entries');
     }
@@ -26,12 +36,15 @@ export class CarsService {
   }
 
   findAll() {
-    return this.carsRepository.find();
+    return this.carsRepository.find({
+      relations: { Automaker: true },
+    });
   }
 
   async findOne(id: number) {
     const car = await this.carsRepository.findOne({
       where: { VehicleID: +id },
+      relations: { Automaker: true },
     });
     if (!car) {
       throw new UserInputError(`Coffee ${id} does not exist`);

@@ -4,7 +4,7 @@
 
 type Automaker {
   MakeId: ID!
-  Cars: Car
+  Cars: [Car!]
   Make: String!
 }
 

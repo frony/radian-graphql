@@ -5,11 +5,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Car } from './entities/car.entity';
 import { AutomakersService } from '../automakers/automakers.service';
 import { Automaker } from '../automakers/entities/automaker.entity';
-// import { Carmaker } from './entities/carmaker.entity';
+// import { AutomakersModule } from '../automakers/automakers.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Car, Automaker])],
-  // imports: [TypeOrmModule.forFeature([Car, Carmaker])],
+  // imports: [TypeOrmModule.forFeature([Car]), AutomakersModule],
+  // providers: [CarsResolver, CarsService],
   providers: [CarsResolver, CarsService, AutomakersService],
   exports: [CarsService],
 })

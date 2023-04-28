@@ -1,19 +1,18 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UserInputError } from '@nestjs/apollo';
 import { CreateAutomakerInput } from './dto/create-automaker.input';
 import { UpdateAutomakerInput } from './dto/update-automaker.input';
 import { Automaker } from './entities/automaker.entity';
-import { CarsService } from '../cars/cars.service';
 
 @Injectable()
 export class AutomakersService {
   constructor(
     @InjectRepository(Automaker)
     private readonly automakersRepository: Repository<Automaker>,
-    private readonly carsService: CarsService,
   ) {}
+
+  // private carIndex = 1;
 
   create(createAutomakerInput: CreateAutomakerInput) {
     const newAutomaker = this.automakersRepository.create(createAutomakerInput);
@@ -32,7 +31,7 @@ export class AutomakersService {
       relations: { Cars: true },
     });
     if (!automaker) {
-      throw new UserInputError(`Automaker ${id} does not exist`);
+      throw new NotFoundException(`Automaker ${id} does not exist`);
     }
     return automaker;
   }
@@ -48,12 +47,14 @@ export class AutomakersService {
   }
 
   async update(id: number, updateAutomakerInput: UpdateAutomakerInput) {
+    // const car = await this.carsService.findOne(this.carIndex);
+    // this.carIndex++;
     const automaker = await this.automakersRepository.preload({
       MakeId: id,
       ...updateAutomakerInput,
     });
     if (!automaker) {
-      throw new UserInputError(`Automaker ${id} does not exist`);
+      throw new NotFoundException(`Automaker ${id} does not exist`);
     }
     return this.automakersRepository.save(automaker);
   }
