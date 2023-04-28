@@ -1,11 +1,13 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { CarColor } from '../../common/enums/car-color.enum';
+import { CarMake } from '../../common/enums/car-make.enum';
 
 @InputType({ description: 'Create car input object input' })
 export class CreateCarInput {
   @IsNotEmpty()
   @IsString()
-  Make: string;
+  Make: CarMake;
 
   @IsNotEmpty()
   @IsString()
@@ -18,5 +20,5 @@ export class CreateCarInput {
 
   @IsNotEmpty()
   @IsString()
-  Color: string;
+  Color: CarColor;
 }

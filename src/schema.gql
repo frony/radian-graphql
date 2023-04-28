@@ -12,10 +12,76 @@ type Automaker {
 type Car {
   VehicleID: ID!
   Automaker: Automaker
-  Make: String!
+  Make: CarMake!
   Model: String!
   Year: Float!
-  Color: String!
+  Color: CarColor!
+}
+
+enum CarMake {
+  ACURA
+  ALFA_ROMEO
+  ASTON_MARTIN
+  AUDI
+  BENTLEY
+  BMW
+  BUGATTI
+  BUICK
+  CADILLAC
+  CHEVROLET
+  CHRYSLER
+  CITROEN
+  DODGE
+  FERRARI
+  FIAT
+  FORD
+  GENESIS
+  GMC
+  HONDA
+  HYUNDAI
+  INFINITI
+  JAGUAR
+  JEEP
+  KIA
+  KOENIGSEGG
+  LAMBORGHINI
+  LAND_ROVER
+  LEXUS
+  LINCOLN
+  LOTUS
+  MASERATI
+  MAZDA
+  MCLAREN
+  MERCEDES_BENZ
+  MINI
+  MITSUBISHI
+  NISSAN
+  PAGANI
+  PEUGEOT
+  PININFARINA
+  PORSCHE
+  RAM
+  ROLLS_ROYCE
+  SUBARU
+  TESLA
+  TOYOTA
+  TUCKER
+  VOLKSWAGEN
+  VOLVO
+  OTHER
+}
+
+enum CarColor {
+  BLACK
+  WHITE
+  BLUE
+  SILVER
+  GOLD
+  RED
+  GREEN
+  YELLOW
+  BROWN
+  OTHER
 }
 
 type Query {
@@ -37,17 +103,17 @@ type Mutation {
 """Create car input object input"""
 input CreateCarInput {
   Year: Int!
-  Make: String!
+  Make: CarMake!
   Model: String!
-  Color: String!
+  Color: CarColor!
 }
 
 """Update car input object input"""
 input UpdateCarInput {
   Year: Int
-  Make: String
+  Make: CarMake
   Model: String
-  Color: String
+  Color: CarColor
 }
 
 input CreateAutomakerInput {
