@@ -1,11 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import {
-  Column,
-  Entity,
-  // JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Automaker } from '../../automakers/entities/automaker.entity';
 
 @Entity()

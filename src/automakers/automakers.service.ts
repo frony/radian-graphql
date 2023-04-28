@@ -12,8 +12,6 @@ export class AutomakersService {
     private readonly automakersRepository: Repository<Automaker>,
   ) {}
 
-  // private carIndex = 1;
-
   create(createAutomakerInput: CreateAutomakerInput) {
     const newAutomaker = this.automakersRepository.create(createAutomakerInput);
     return this.automakersRepository.save(newAutomaker);
@@ -47,8 +45,6 @@ export class AutomakersService {
   }
 
   async update(id: number, updateAutomakerInput: UpdateAutomakerInput) {
-    // const car = await this.carsService.findOne(this.carIndex);
-    // this.carIndex++;
     const automaker = await this.automakersRepository.preload({
       MakeId: id,
       ...updateAutomakerInput,

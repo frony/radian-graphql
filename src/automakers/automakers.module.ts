@@ -7,7 +7,6 @@ import { CarsService } from '../cars/cars.service';
 import { Automaker } from './entities/automaker.entity';
 
 @Module({
-  // imports: [TypeOrmModule.forFeature([Automaker])],
   imports: [TypeOrmModule.forFeature([Car, Automaker])],
   providers: [AutomakersResolver, AutomakersService, CarsService],
   exports: [AutomakersService],
