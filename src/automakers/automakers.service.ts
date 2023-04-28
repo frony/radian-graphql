@@ -13,8 +13,7 @@ export class AutomakersService {
   ) {}
 
   create(createAutomakerInput: CreateAutomakerInput) {
-    const newAutomaker = this.automakersRepository.create(createAutomakerInput);
-    return this.automakersRepository.save(newAutomaker);
+    return this.automakersRepository.create(createAutomakerInput);
   }
 
   findAll() {

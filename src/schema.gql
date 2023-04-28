@@ -21,7 +21,7 @@ type Car {
 type Query {
   GetAllCars: [Car!]!
   GetCarById(id: Int!): Car!
-  GetAutomakers: [Automaker!]!
+  GetCarsByModel: [Automaker!]!
   GetAutomakerById(id: ID!): Automaker!
 }
 

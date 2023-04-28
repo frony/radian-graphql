@@ -16,7 +16,7 @@ export class AutomakersResolver {
     return this.automakersService.create(createAutomakerInput);
   }
 
-  @Query(() => [Automaker], { name: 'GetAutomakers' })
+  @Query(() => [Automaker], { name: 'GetCarsByModel' })
   findAll() {
     return this.automakersService.findAll();
   }

@@ -3,13 +3,13 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateCarInput } from './dto/create-car.input';
-import { UpdateCarInput } from './dto/update-car.input';
 import { Car } from './entities/car.entity';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserInputError } from '@nestjs/apollo';
 import { AutomakersService } from '../automakers/automakers.service';
+import { CreateCarInput } from './dto/create-car.input';
+import { UpdateCarInput } from './dto/update-car.input';
 
 @Injectable()
 export class CarsService {
@@ -17,22 +17,37 @@ export class CarsService {
     @InjectRepository(Car)
     private readonly carsRepository: Repository<Car>,
     private readonly automakersService: AutomakersService,
+    private readonly dataSource: DataSource,
   ) {}
 
   async create(createCarDto: CreateCarInput) {
-    const { Make } = createCarDto;
-    let automaker = await this.automakersService.findByMake(Make);
-    if (!automaker) {
-      automaker = await this.automakersService.create({ Make });
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+      const { Make } = createCarDto;
+      let automaker = await this.automakersService.findByMake(Make);
+      if (!automaker) {
+        const newAutomaker = await this.automakersService.create({ Make });
+        automaker = await queryRunner.manager.save(newAutomaker);
+      }
+      const car = await this.carsRepository.create({
+        ...createCarDto,
+        Automaker: automaker,
+      });
+      if (!car) {
+        throw new BadRequestException('Please review your entries');
+      }
+      const savedCar = await queryRunner.manager.save(car);
+      await queryRunner.commitTransaction();
+      return savedCar;
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      console.log(error);
+    } finally {
+      await queryRunner.release();
     }
-    const car = await this.carsRepository.create({
-      ...createCarDto,
-      Automaker: automaker,
-    });
-    if (!car) {
-      throw new BadRequestException('Please review your entries');
-    }
-    return this.carsRepository.save(car);
   }
 
   findAll() {
