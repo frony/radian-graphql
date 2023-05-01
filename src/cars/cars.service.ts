@@ -43,7 +43,7 @@ export class CarsService {
       return savedCar;
     } catch (error) {
       await queryRunner.rollbackTransaction();
-      console.log(error);
+      return new BadRequestException(error.message);
     } finally {
       await queryRunner.release();
     }
